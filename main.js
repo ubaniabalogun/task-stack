@@ -1,38 +1,48 @@
-import { app, BrowserWindow } from 'electron'
+import { app, Tray, Menu } from 'electron'
 import React from 'react'
 import path from 'path'
-import url from 'url'
+import { windowConfig, shortcuts, trayTemplate } from './app/config/constants'
+import { registerHotkey, unregisterHotkeys } from './app/utils/setup'
+import { EntryWindowManager } from './app/utils/window'
 
-let win
+let ewManager
+let tray
 
-function createWindow(){
-  // Create BrowserWindow
-  //win = new BrowserWindow({width: 600, height: 74, frame:false})
-  win = new BrowserWindow({width: 800, height: 800})
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'app/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+const indexPath = path.join(__dirname,'app/index.html')
+const trayIcon = path.join(__dirname,'app/static/trayIcon.png')
 
-  // Open DevTools
-  win.webContents.openDevTools()
-  win.on('closed', () => {
-    win = null
-  })
-}
+app.on('ready',() => {
+  app.dock.hide()
+  ewManager = new EntryWindowManager(windowConfig,indexPath)
+  ewManager.win.webContents.openDevTools()
+  try {
+    // TODO: Figure if currying the handlers is the approriate way to grant them access to the global `win` variable
+    registerHotkey(shortcuts.entryViewHotkey, () => ewManager.handleEntryViewHotkey(), () => ewManager.handleEntryViewHotkeyRegFailure())
+  } catch (error) {
+    ewManager.handleEntryViewHotkeyRegFailure()
+  }
 
-
-app.on('ready',createWindow)
-
-app.on('window-all-closed', () => {
-  //if (process.platform !== 'darwin'){
-    app.quit()
-  //}
+  tray = new Tray(trayIcon)
+  const contextMenu = Menu.buildFromTemplate(trayTemplate)
+  tray.setToolTip('TaskStack')
+  tray.setContextMenu(contextMenu)
 })
 
-app.on('activate', () => {
-  if (win === null){
-    createWindow()
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin'){
+    app.quit()
   }
+})
+
+
+
+app.on('activate', () => {
+  if (!ewManager.win) {
+    ewManager = new EntryWindowManager(windowConfig,indexPath)
+  }
+})
+
+app.on('will-quit', () => {
+  //NOTE: Don't know how necessary this is
+  unregisterHotkeys()
 })
