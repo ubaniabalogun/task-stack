@@ -1,10 +1,28 @@
 import React, { Component } from 'react'
+import Radium from 'radium'
+import { baseStyles } from '../styles/baseStyles'
 
-function Main() {
+
+const styles = {
+  main: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    minHeight: '72px'
+  }
+}
+
+
+function Main({children}) {
   return (
-    <div>Hello From Main!</div>
+    <div style={[baseStyles.base, styles.main]}>
+      {children}
+    </div>
   )
 }
 
+
+Main = Radium(Main)
 
 export default Main
