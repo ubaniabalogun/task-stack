@@ -10,21 +10,7 @@ export default class EntryViewContainer extends Component {
       entry: ''
     }
   }
-
-  // componentDidMount(){
-  //   console.log('component did mount',this.state)
-  // }
-  //
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log(`EntryViewContainer component will update`,nextState)
-  // }
-  //
-  // componentDidUpdate(){
-  //   console.log('component did update',this.state)
-  // }
-
-
-
+  
   handleUpdateEntry(event){
     this.setState({
       entry: event.target.value

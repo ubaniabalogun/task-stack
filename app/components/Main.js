@@ -16,7 +16,7 @@ const styles = {
 
 function Main({children}) {
   return (
-    <div className="test" style={[baseStyles.base, styles.main]}>
+    <div style={[baseStyles.base, styles.main]}>
       {children}
     </div>
   )
