@@ -2,6 +2,7 @@
 Utils for managing browser windows
 */
 import { BrowserWindow } from 'electron'
+import { WINDOW_Y_OFFSET } from '../config/constants'
 import url from 'url'
 import path from 'path'
 
@@ -19,8 +20,6 @@ export class BrowserWindowManager {
       slashes: true
     }))
   }
-
-
 }
 
 /*
@@ -30,6 +29,9 @@ export class EntryWindowManager extends BrowserWindowManager {
 
   constructor(windowConfig, pathname){
     super(windowConfig,pathname)
+    let [x,y] = this.win.getPosition()
+    y -= WINDOW_Y_OFFSET
+    this.win.setPosition(x,y)
     this.setupEventListeners()
   }
 

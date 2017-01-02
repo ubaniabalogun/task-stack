@@ -9,7 +9,8 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    minHeight: '72px'
+    minHeight: '72px',
+    WebkitAppRegion: 'drag'
   }
 }
 

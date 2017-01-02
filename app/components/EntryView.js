@@ -6,7 +6,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    WebkitAppRegion: 'drag'
   },
   button: {
     height: '58px',
@@ -14,13 +15,15 @@ const styles = {
     margin: '0px',
     outline: 'none',
     padding: '0px',
+    WebkitAppRegion: 'no-drag'
   },
   input: {
     height: '58px',
     width: '490px',
     fontSize: '42px',
     paddingLeft: '10px',
-    outline: 'none'
+    outline: 'none',
+    WebkitAppRegion: 'no-drag'
   }
 }
 

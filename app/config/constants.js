@@ -5,10 +5,21 @@ export const shortcuts = {
 }
 
 export const windowConfig = {
-  width: 800,
-  height: 800,
-  show: false
+  width: 580,
+  height: 74,
+  show: false,
+  frame: false,
+  alwaysOnTop: true,
+  fullscreenable: false,
+  maximizable: false,
+  minimizable: false,
+  resizable: false,
+  disableAutoHideCursor: true
+
 }
+
+export const WINDOW_Y_OFFSET = 241
+
 
 export const trayTemplate = [
   {label: 'Quit', role: 'quit'},
