@@ -43,6 +43,7 @@ function Input({ onUpdateEntry, entry }){
       type="text"
       onChange={onUpdateEntry}
       value={entry}
+      ref={ (input) => { input ? input.focus(): null } }
     />
   )
 }
