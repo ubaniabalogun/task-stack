@@ -14,16 +14,6 @@ const trayIcon = path.join(__dirname,'app/static/trayIcon.png')
 app.on('ready',() => {
   app.dock.hide()
   ewManager = new EntryWindowManager(windowConfig,indexPath)
-  //ewManager.win.webContents.openDevTools({mode:'undocked'})
-  ewManager.win.once('ready-to-show', () => {
-    try {
-      // TODO: Figure if currying the handlers is the approriate way to grant them access to the global `win` variable
-      registerHotkey(shortcuts.entryViewHotkey, () => ewManager.handleEntryViewHotkey(), () => ewManager.handleEntryViewHotkeyRegFailure())
-    } catch (error) {
-      ewManager.handleEntryViewHotkeyRegFailure()
-    }
-  })
-
   tray = new Tray(trayIcon)
   const contextMenu = Menu.buildFromTemplate(trayTemplate)
   tray.setToolTip('TaskStack')
@@ -35,8 +25,6 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
-
-
 
 app.on('activate', () => {
   if (!ewManager.win) {

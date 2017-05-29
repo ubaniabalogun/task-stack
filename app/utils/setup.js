@@ -1,7 +1,5 @@
 // Setup Functions go here
 import { globalShortcut } from 'electron'
-
-
 /*
 Register a hotkey
 */

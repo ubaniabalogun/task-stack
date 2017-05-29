@@ -1,7 +1,7 @@
 // This file contains constants that are used to configure the application
 
-export const shortcuts = {
-  entryViewHotkey: 'CommandOrControl+Shift+Space'
+export const SHORTCUTS = {
+  ENTRYVIEWHOTKEY: 'CommandOrControl+Shift+Space'
 }
 
 export const windowConfig = {
