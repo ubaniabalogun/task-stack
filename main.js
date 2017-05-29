@@ -1,8 +1,7 @@
 import { app, Tray, Menu } from 'electron'
-import React from 'react'
 import path from 'path'
-import { windowConfig, shortcuts, trayTemplate } from './app/config/constants'
-import { registerHotkey, unregisterHotkeys } from './app/utils/setup'
+import { windowConfig, trayTemplate } from './app/config/constants'
+import { unregisterHotkeys } from './app/utils/setup'
 import { EntryWindowManager } from './app/utils/window'
 
 let ewManager
