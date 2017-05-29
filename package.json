@@ -12,6 +12,7 @@
     "electron-prebuilt-compile": "^1.4.12"
   },
   "dependencies": {
+    "nedb": "^1.8.0",
     "radium": "^0.18.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

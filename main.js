@@ -36,8 +36,6 @@ app.on('window-all-closed', () => {
   }
 })
 
-
-
 app.on('activate', () => {
   if (!ewManager.win) {
     ewManager = new EntryWindowManager(windowConfig,indexPath)
