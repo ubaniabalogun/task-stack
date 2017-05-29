@@ -2,11 +2,10 @@
 Utils for managing browser windows
 */
 import { BrowserWindow } from 'electron'
-import { WINDOW_Y_OFFSET } from '../config/constants'
+import { WINDOW_Y_OFFSET, SHORTCUTS } from '../config/constants'
+import { registerHotkey, unregisterHotkeys } from './setup'
 import url from 'url'
 import path from 'path'
-
-
 /*
 BrowserWindowManager base class
 */
@@ -54,9 +53,15 @@ export class EntryWindowManager extends BrowserWindowManager {
       console.log('setupEventListeners: No window exists')
       return false
     }
-
     this.win.on('closed',() => this.win = null)
     this.win.on('blur', () => this.win.hide())
+    this.win.once('ready-to-show', () => {
+      try {
+        const ret = registerHotkey(SHORTCUTS.ENTRYVIEWHOTKEY,() => this.handleEntryViewHotkey(), () => this.handleEntryViewHotkeyRegFailure())
+      } catch (error) {
+        this.handleEntryViewHotkeyRegFailure()
+      }
+    })
     return true
   }
 }
