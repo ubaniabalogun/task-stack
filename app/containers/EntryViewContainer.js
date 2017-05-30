@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import EntryView from '../components/EntryView'
-
+import { tasklist } from '../utils/db'
 
 export default class EntryViewContainer extends Component {
 
@@ -10,7 +10,7 @@ export default class EntryViewContainer extends Component {
       entry: ''
     }
   }
-  
+
   handleUpdateEntry(event){
     this.setState({
       entry: event.target.value
@@ -20,6 +20,7 @@ export default class EntryViewContainer extends Component {
   handleSubmitEntry(event){
     event.preventDefault()
     const { entry } = this.state
+    tasklist.addEntry(entry)
     this.setState({
       entry: ''
     })
