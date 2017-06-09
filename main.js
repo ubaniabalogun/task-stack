@@ -13,9 +13,10 @@ const trayIcon = path.join(__dirname,'app/static/trayIcon.png')
 app.on('ready',() => {
   app.dock.hide()
   ewManager = new EntryWindowManager(windowConfig,indexPath)
+  ewManager.win.webContents.openDevTools({mode:'undocked'})
   tray = new Tray(trayIcon)
   const contextMenu = Menu.buildFromTemplate(trayTemplate)
-  tray.setToolTip('TaskStack')
+  tray.setToolTip('Quickly.do')
   tray.setContextMenu(contextMenu)
 })
 
